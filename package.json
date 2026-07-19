@@ -3,11 +3,15 @@
   "version": "0.10.0",
   "description": "HTTP Man In The Middle (MITM) Proxy",
   "main": "dist/index.js",
-  "types": "index.d.ts",
-  "type": "module",
+  "types": "types.d.ts",
+  "files": [
+    "dist",
+    "types.d.ts"
+  ],
   "scripts": {
     "test": "cross-env TS_NODE_TRANSPILE_ONLY=true TS_NODE_PRETTY=true ts-mocha test/01_proxy.ts --exit",
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "prepack": "npm run build"
   },
   "repository": "https://github.com/joeferner/node-http-mitm-proxy",
   "bugs": {
@@ -42,6 +46,7 @@
     "request": "^2.88.2"
   },
   "dependencies": {
+    "@types/ws": "^8.5.3",
     "async": "^3.2.4",
     "cross-env": "^7.0.3",
     "debug": "^4.3.4",
@@ -54,6 +59,7 @@
     "ts-mocha": "^10.0.0",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.4",
+    "uuid": "^8.3.2",
     "ws": "^8.8.0",
     "yargs": "^17.5.1"
   }

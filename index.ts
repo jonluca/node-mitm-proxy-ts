@@ -1,3 +1,8 @@
-import proxy from './lib/proxy'
+import Proxy, { gunzip, wildcard } from "./lib/proxy";
 
-export default proxy;
+const createProxy = () => new Proxy();
+
+createProxy.gunzip = gunzip;
+createProxy.wildcard = wildcard;
+
+export = createProxy;

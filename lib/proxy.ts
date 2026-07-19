@@ -158,7 +158,7 @@ export class Proxy implements IProxy {
         self._onError.bind(self, "HTTP_SERVER_ERROR", null)
       );
       self.wsServer.on("connection", (ws, req) => {
-        ws.upgradeReq = req;
+        (ws as WebSocketType & { upgradeReq: IncomingMessage }).upgradeReq = req;
         self._onWebSocketServerConnect.call(self, false, ws, req);
       });
       const listenOptions = {
@@ -208,7 +208,7 @@ export class Proxy implements IProxy {
     const self = this;
     const wssServer = new WebSocketServer({ server: httpsServer });
     wssServer.on("connection", (ws, req) => {
-      ws.upgradeReq = req;
+      (ws as WebSocketType & { upgradeReq: IncomingMessage }).upgradeReq = req;
       self._onWebSocketServerConnect.call(self, true, ws, req);
     });
 

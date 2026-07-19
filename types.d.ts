@@ -1,9 +1,7 @@
 import http = require("http");
 import https = require("https");
-import type CA from "../lib/ca";
-import type WebSocket from "ws";
+import type * as WebSocket from "ws";
 import type { Server } from "https";
-import type { WebSocket as WebSocketType, WebSocketServer } from "ws";
 
 declare namespace HttpMitmProxy {
   export interface IProxyStatic {
@@ -40,12 +38,12 @@ declare namespace HttpMitmProxy {
   export interface IProxySSLServer {
     port: number;
     server?: Server;
-    wsServer?: WebSocketServer;
+    wsServer?: WebSocket.WebSocketServer;
   }
   export type ICreateServerCallback = (
     port: number,
     server: Server,
-    wssServer: WebSocketServer
+    wssServer: WebSocket.WebSocketServer
   ) => void;
   export type ErrorCallback = (error?: Error | null, data?: any) => void;
   type OnRequestParams = (ctx: IContext, callback: ErrorCallback) => void;
@@ -161,7 +159,7 @@ declare namespace HttpMitmProxy {
     forceSNI: boolean;
     httpsPort?: number;
     sslCaDir: string;
-    ca: CA;
+    ca: unknown;
   };
 
   /** signatures for various callback functions */
@@ -329,9 +327,9 @@ declare namespace HttpMitmProxy {
 
   export type IWebSocketContext = IBaseContext & {
     /** instance of WebSocket object from https://github.com/websockets/ws */
-    clientToProxyWebSocket?: WebSocketType;
+    clientToProxyWebSocket?: WebSocket.WebSocket;
     /** instance of WebSocket object from https://github.com/websockets/ws */
-    proxyToServerWebSocket?: WebSocketType;
+    proxyToServerWebSocket?: WebSocket.WebSocket;
 
     proxyToServerWebSocketOptions?: WebSocket.ClientOptions & { url?: string };
     /** WebSocket Connection Hanlders */
