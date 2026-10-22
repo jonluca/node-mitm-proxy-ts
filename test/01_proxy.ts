@@ -107,7 +107,7 @@ describe("proxy", function () {
 
   beforeEach((done) => {
     proxy = new Proxy();
-    proxy.listen({ port: testProxyPort }, done);
+    proxy.listen({ port: testProxyPort, host: testHost }, done);
     proxy.onError((ctx, err, errorKind) => {
       const url =
         ctx && ctx.clientToProxyRequest ? ctx.clientToProxyRequest.url : "";
